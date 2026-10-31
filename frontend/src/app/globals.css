@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+:root {
+  /* Midnight Ledger Design Tokens */
+  --background: #F4F6F5;       /* mineral white workspace */
+  --surface: #FFFFFF;          /* cards, tables, dialogs */
+  --surface-muted: #EDF2F0;    /* quiet inset sections */
+
+  --sidebar: #172B36;          /* midnight navy */
+  --sidebar-hover: #263E49;    /* slate navy */
+  --sidebar-active: #1D5A52;   /* deep teal active state */
+  --sidebar-border: #233A46;
+  --sidebar-text: #9EB1BC;
+  --sidebar-text-active: #FFFFFF;
+
+  --primary: #287D73;          /* muted teal */
+  --primary-hover: #20665E;    /* deep teal */
+  --primary-soft: #E7F2EF;     /* pale teal, selected states */
+  --primary-foreground: #FFFFFF;
+
+  --secondary-accent: #B86F4B; /* burnished copper */
+  --secondary-soft: #F8EDE6;
+
+  --text-primary: #202C33;     /* charcoal */
+  --text-secondary: #53636D;   /* slate */
+  --text-muted: #82929E;
+  --text-inverse: #FFFFFF;
+  --dark-surface-text: #FFFFFF;
+  --dark-surface-muted: #D6E0E1;
+
+  --border: #D8E0DE;           /* cool stone */
+  --border-strong: #B8C7C3;
+
+  --success: #24734D;          /* forest green */
+  --success-soft: #E7F4ED;
+  --warning: #96600C;          /* dark amber */
+  --warning-soft: #FDF6EC;
+  --danger: #B42332;           /* deep red */
+  --danger-soft: #FDF1F2;
+  --info: #315F82;             /* steel blue */
+  --info-soft: #EDF4F9;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========================================================
+   SMOOTH CARD UI THEME
+   Soft ambient shadow, delicate borders, smooth 18-22px radius
+   ======================================================== */
+.card-ui,
+.bg-white.rounded-xl,
+.bg-white.rounded-2xl,
+.bg-white.overflow-hidden.border {
+  border-radius: 18px !important;
+  border-color: rgba(216, 224, 222, 0.65) !important;
+  box-shadow: 0 1px 3px 0 rgba(23, 43, 54, 0.02), 
+              0 6px 18px -2px rgba(23, 43, 54, 0.045), 
+              0 12px 28px -6px rgba(23, 43, 54, 0.02) !important;
+  transition: border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-ui:hover,
+.bg-white.rounded-xl:hover,
+.bg-white.rounded-2xl:hover {
+  border-color: rgba(40, 125, 115, 0.35) !important;
+  box-shadow: 0 3px 8px 0 rgba(23, 43, 54, 0.03), 
+              0 10px 26px -3px rgba(23, 43, 54, 0.075), 
+              0 18px 36px -6px rgba(23, 43, 54, 0.03) !important;
+}
+
+/* Reduce border sharpness globally */
+.border-\[\#D8E0DE\],
+.border-\[\#d8e0de\],
+.border-slate-200 {
+  border-color: rgba(216, 224, 222, 0.6) !important;
+}
+
+/* Soften ambient box-shadows across the board */
+.shadow-xs {
+  box-shadow: 0 1px 3px 0 rgba(23, 43, 54, 0.02), 0 4px 14px -2px rgba(23, 43, 54, 0.04) !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 2px 5px 0 rgba(23, 43, 54, 0.03), 0 8px 20px -3px rgba(23, 43, 54, 0.055) !important;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 10px 0 rgba(23, 43, 54, 0.03), 0 14px 28px -4px rgba(23, 43, 54, 0.08) !important;
+}
+
+/* Inner inset panels get softer borders and smooth 14px radius */
+.bg-\[\#F4F6F5\].border,
+.bg-\[\#F4F6F5\].border-\[\#D8E0DE\],
+.bg-\[\#F4F6F5\].border-slate-200 {
+  border-radius: 14px;
+  border-color: rgba(216, 224, 222, 0.55) !important;
+}
+
+/* Smooth inner panel headers */
+.bg-white.rounded-xl > div:first-child,
+.bg-white.rounded-2xl > div:first-child {
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
+}
+.bg-white.rounded-xl > div:last-child,
+.bg-white.rounded-2xl > div:last-child {
+  border-bottom-left-radius: 17px;
+  border-bottom-right-radius: 17px;
+}
+
+/* Table header seamless rounding inside cards */
+.bg-white.overflow-hidden thead tr:first-child th:first-child,
+.overflow-hidden > table thead tr:first-child th:first-child {
+  border-top-left-radius: 17px;
+}
+.bg-white.overflow-hidden thead tr:first-child th:last-child,
+.overflow-hidden > table thead tr:first-child th:last-child {
+  border-top-right-radius: 17px;
+}
+
+/* Modal and dialog smooth curvature */
+.rounded-xl {
+  border-radius: 18px;
+}
+.rounded-2xl {
+  border-radius: 22px;
+}
+
+/* Glass-like focus overlay for dashboard hero */
+.focus-glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(216, 224, 222, 0.65);
+  border-radius: 20px;
+  box-shadow: 0 4px 22px -2px rgba(23, 43, 54, 0.05);
+}
+
+.dark-scenic-panel {
+  background-color: #172B36;
+  color: #FFFFFF;
+  border: 1px solid #263E49;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px -2px rgba(18, 34, 43, 0.12);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4D1CE;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A6B8B4;
+}
+
+/* Print styles for Invoice X-Ray / Printing */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print,
+  aside,
+  header,
+  nav,
+  .print-hide {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-container {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+}

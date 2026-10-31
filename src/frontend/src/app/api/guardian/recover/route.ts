@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { serverStore } from "@/lib/server-store";
+import { forwardToBackend, BACKEND_URL } from "@/lib/api-adapter";
 
 export async function POST(req: Request) {
   try {
@@ -7,6 +8,17 @@ export async function POST(req: Request) {
     const issueId = body.issue_id || body.id;
     if (!issueId) {
       return NextResponse.json({ error: "Missing issue_id" }, { status: 400 });
+    }
+
+    if (BACKEND_URL) {
+      const authHeader = req.headers.get("authorization");
+      const result = await forwardToBackend("/api/guardian/recover", {
+        method: "POST",
+        body: JSON.stringify({ issue_id: issueId }),
+      }, authHeader);
+      if (result.success && result.data) {
+        return NextResponse.json(result.data);
+      }
     }
 
     const result = serverStore.recoverIssue(issueId);
